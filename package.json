@@ -1,0 +1,18 @@
+{
+  "name" : "football-club-manager",
+  "version" : "0.0.0",
+  "description" : "A football club manager used to help organizing new games, managing players profiles and grouping before the game.",
+  "main" : "web.js",
+  "scripts" : {
+    "start" : "node web.js",
+    "test" : "echo \"Error: no test specified\" && exit 1"
+  },
+  "author" : "Bo Zhu",
+  "license" : "ISC",
+  "private" : true,
+  "dependencies" : {
+    "express" : "^4.7.1",
+    "logfmt" : "^1.1.2",
+    "pg.js" : "^3.4.1"
+  }
+}
