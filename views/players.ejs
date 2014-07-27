@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Players</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <style>
+      .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th { vertical-align: middle; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Players</h2>
+      <table class="table table-striped">
+        <tr>
+          <th rowspan="2" class="vertical-middle">ID</th>
+          <th rowspan="2" class="vertical-middle">Name</th>
+          <th colspan="8" class="text-center">Ability</th>
+        </tr>
+        <tr>
+          <th>Endurance</th>
+          <th>Speed</th>
+          <th>Dribble</th>
+          <th>Pass</th>
+          <th>Defense</th>
+          <th>Shoot</th>
+          <th>Strength</th>
+          <th>OverallAbility</th>
+        </tr>
+        <tbody>
+          <% for(var i = 0; i < players.length; i++) {%>
+             <tr>
+               <td><%= players[i].id %></td>
+               <td><%= players[i].firstName + " " + players[i].lastName %></td>
+               <td><%= players[i].latestEndurance %></td>
+               <td><%= players[i].latestSpeed %></td>
+               <td><%= players[i].latestDribble %></td>
+               <td><%= players[i].latestPass %></td>
+               <td><%= players[i].latestDefense %></td>
+               <td><%= players[i].latestShoot %></td>
+               <td><%= players[i].latestStrength %></td>
+               <td><%= players[i].latestOverallAbility %></td>
+             </tr>
+             <% } %>
+      </table>
+    </div>
+  </body>
+</html>
