@@ -61,6 +61,26 @@ app.get('/players', function (request, response) {
   });
 });
 
+app.get('/add-player', function (req, res) {
+  // res.send('The start of Football Club Manager!');
+  res.render("add-player", {
+    player : [{
+        "id" : 1,
+        "firstName" : "Bo",
+        "lastName" : "Zhu",
+        "latestEndurance" : 3,
+        "latestSpeed" : 4,
+        "latestDribble" : 4,
+        "latestPass" : 4,
+        "latestDefense" : 5,
+        "latestShoot" : 5,
+        "latestStrength" : 3,
+        "latestOverallAbility" : 90
+      }
+    ]
+  });
+});
+
 // sync the database and start the server
 db.sequelize.sync().complete(function(err) {
   if (err) {
