@@ -11,7 +11,8 @@ module.exports = function (sequelize, DataTypes) {
       type : DataTypes.INTEGER,
       unique : true,
       allowNull : false,
-      autoIncrement : true
+      autoIncrement : true,
+      primaryKey: true
     },
     firstName : {
       type : DataTypes.STRING,
