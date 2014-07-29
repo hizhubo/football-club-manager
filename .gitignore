@@ -4,3 +4,6 @@
 
 # npm packages
 node_modules
+
+# extensions
+*.log
