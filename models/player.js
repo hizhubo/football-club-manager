@@ -14,6 +14,13 @@ module.exports = function (sequelize, DataTypes) {
       autoIncrement : true,
       primaryKey: true
     },
+    number : {
+      type : DataTypes.STRING,
+    },
+    chsName : {
+      type : DataTypes.STRING,
+      allowNull : false
+    },
     firstName : {
       type : DataTypes.STRING,
       allowNull : false
@@ -24,6 +31,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     email : {
       type : DataTypes.STRING,
+      unique : true,
       allowNull : false,
       validate : {
         isEmail : true,
