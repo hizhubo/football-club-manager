@@ -1,56 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Players</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <style>
-      .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th { vertical-align: middle; }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <ul class="nav nav-pills">
-        <li class="active"><a href="/players">All Players</a></li>
-        <li><a href="/add-player">Add New Player</a></li>
-      </ul>
-      <h2>Players</h2>
-      <table class="table table-striped">
-        <tr>
-          <th rowspan="2" class="vertical-middle">ID</th>
-          <th rowspan="2" class="vertical-middle">Name</th>
-          <th colspan="8" class="text-center">Ability</th>
-        </tr>
-        <tr>
-          <th>Endurance</th>
-          <th>Speed</th>
-          <th>Dribble</th>
-          <th>Pass</th>
-          <th>Defense</th>
-          <th>Shoot</th>
-          <th>Strength</th>
-          <th>OverallAbility</th>
-        </tr>
-        <tbody>
-          <% for(var i = 0; i < players.length; i++) {%>
-             <tr>
-               <td><%= players[i].id %></td>
-               <td><%= players[i].firstName + " " + players[i].lastName %></td>
-               <td><%= players[i].latestEndurance %></td>
-               <td><%= players[i].latestSpeed %></td>
-               <td><%= players[i].latestDribble %></td>
-               <td><%= players[i].latestPass %></td>
-               <td><%= players[i].latestDefense %></td>
-               <td><%= players[i].latestShoot %></td>
-               <td><%= players[i].latestStrength %></td>
-               <td><%= players[i].latestOverallAbility %></td>
-             </tr>
-             <% } %>
-      </table>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Players - Football Club Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <h1>Players</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <table data-role="table" id="player-table" data-mode="reflow" class="ui-responsive">
+              <thead>
+                <tr>
+                  <th data-priority="1">Number</th>
+                  <th data-priority="persist">Name</th>
+                  <th data-priority="2">Overall Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = 0; i < players.length; i++) {%>
+                <tr>
+                  <th><%= players[i].number %></th>
+                  <td><a href="/player/<%= players[i].id %>" data-rel="external"><%= players[i].firstName + " " + players[i].lastName + " " + players[i].chsName %></a></td>
+                  <td><%= players[i].latestOverallAbility %></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+        </div>
+        <div data-role="footer">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="/players" data-icon="grid" class="ui-btn-active">Players</a></li>
+                    <li><a href="/add-player" data-icon="plus" class="ui-btn-active">Add Player</a></li>
+                    <li><a href="#" data-icon="gear">Setup</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </body>
+</body>
 </html>

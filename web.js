@@ -6,6 +6,7 @@ var http = require('http');
 var https = require('https');
 var db = require('./models');
 var bodyParser = require('body-parser');
+var rest = require('restler');
 
 var app = express();
 app.set('views', __dirname + '/views');
@@ -38,31 +39,11 @@ app.get('/', function (req, res) {
 
 // Render example.com/players
 app.get('/players', function (request, response) {
-  global.db.Player.findAll().success(function (players) {
-    var players_json = [];
-    players.forEach(function (player) {
-      players_json.push({
-        id : player.id,
-        firstName : player.firstName,
-        lastName : player.lastName,
-        latestEndurance : player.latestEndurance,
-        latestSpeed : player.latestSpeed,
-        latestDribble : player.latestDribble,
-        latestPass : player.latestPass,
-        latestDefense : player.latestDefense,
-        latestShoot : player.latestShoot,
-        latestStrength : player.latestStrength,
-        latestOverallAbility : player.latestOverallAbility
-      });
-    });
-
+  rest.get(global.apiroot + '/players').once('complete', function (data) {
     // Uses views/players.ejs
     response.render("players", {
-      players : players_json
+      players : data
     });
-  }).error(function (err) {
-    console.log(err);
-    response.send("error retrieving players");
   });
 });
 

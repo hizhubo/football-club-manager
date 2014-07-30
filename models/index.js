@@ -25,6 +25,7 @@ if (!global.hasOwnProperty('db')) {
             logging:  true //false
         };
         sq = new Sequelize(dbname, user, password, config);
+        global.apiroot = '/api';
     } else {
         /* Local database
            We parse the .pgpass file for the connection string parameters.
@@ -42,6 +43,7 @@ if (!global.hasOwnProperty('db')) {
             host:     host,
         };
         var sq = new Sequelize(dbname, user, password, config);
+        global.apiroot = 'http://localhost:81/api';
     }
     global.db = {
         Sequelize: Sequelize,
