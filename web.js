@@ -20,16 +20,16 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
   rest.get(global.apiroot + '/players').once('complete', function (data) {
     // Uses views/players.ejs
-    response.render("players", {
+    res.render("players", {
       players : data
     });
   });
 });
 
-app.get('/players', function (request, response) {
+app.get('/players', function (req, res) {
   rest.get(global.apiroot + '/players').once('complete', function (data) {
     // Uses views/players.ejs
-    response.render("players", {
+    res.render("players", {
       players : data
     });
   });
