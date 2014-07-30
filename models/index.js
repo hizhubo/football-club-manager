@@ -25,7 +25,7 @@ if (!global.hasOwnProperty('db')) {
             logging:  true //false
         };
         sq = new Sequelize(dbname, user, password, config);
-        global.apiroot = '/api';
+        global.apiroot = 'http://football-club-manager.herokuapp.com/api';
     } else {
         /* Local database
            We parse the .pgpass file for the connection string parameters.
