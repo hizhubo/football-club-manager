@@ -1,64 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Add Players</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <ul class="nav nav-pills">
-        <li><a href="/players">All Players</a></li>
-        <li class="active"><a href="/add-player">Add New Player</a></li>
-      </ul>
-      <h2>Add Players</h2>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="First Name">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Last Name">
-      </div>
-      <div class="input-group">
-        <span class="input-group-addon">@</span>
-        <input type="text" class="form-control" placeholder="Email">
-      </div>
-      <div class="input-group">
-        <input type="password" class="form-control" placeholder="password">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Mobile">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Wechat">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Favorite Position">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Endurance">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Speed">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Dribble">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Pass">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Defense">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Shoot">
-      </div>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Strength">
-      </div>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Create/Update Player - Football Club Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <h1>Create/Update Player</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <form>
+                <label for="textinput-FirstName">First Name:</label>
+                <input name="textinput-FirstName" id="textinput-FirstName" type="text" placeholder="" value="" data-clear-btn="true">
+                <label for="textinput-LastName">Last Name:</label>
+                <input name="textinput-LastName" id="textinput-LastName" type="text" placeholder="" value="" data-clear-btn="true">
+                <label for="textinput-ChsName">中文名</label>
+                <input name="textinput-ChsName" id="textinput-ChsName" type="text" placeholder="" value="" data-clear-btn="true">
+                <label for="textinput-Email">Email:</label>
+                <input name="textinput-Email" id="textinput-Email" type="text" placeholder="" value="" data-clear-btn="true">
+                <label for="textinput-Number">Number:</label>
+                <input name="textinput-Number" id="textinput-Number" type="text" placeholder="" value="" data-clear-btn="true">
+                <label for="textinput-Mobile">Mobile:</label>
+                <input name="textinput-Mobile" id="textinput-Mobile" type="text" placeholder="" value="" data-clear-btn="true">
+                <label for="textinput-Wechat">Wechat:</label>
+                <input name="textinput-Wechat" id="textinput-Wechat" type="text" placeholder="" value="" data-clear-btn="true">
+                <label for="select-FavoritePosition">最爱位置 Favorite Position:</label>
+                <select name="select-FavoritePosition" id="select-FavoritePosition">
+                    <option value="">Select</option>
+                    <option value="Forward">前锋 Forward</option>
+                    <option value="MidFielder">中场 MidFielder</option>
+                    <option value="FullBack">后卫 FullBack</option>
+                    <option value="Goalie">门将 Goalie</option>
+                </select>
+                <label for="slider-s">耐力 Endurance:</label>
+                <input name="slider-Endurance" id="slider-Endurance" type="range" min="1" max="5" value="1" data-highlight="true">
+                <label for="slider-s">速度 Speed:</label>
+                <input name="slider-Speed" id="slider-Speed" type="range" min="1" max="5" value="1" data-highlight="true">
+                <label for="slider-s">盘带 Dribble:</label>
+                <input name="slider-Dribble" id="slider-Dribble" type="range" min="1" max="5" value="1" data-highlight="true">
+                <label for="slider-s">传球 Pass:</label>
+                <input name="slider-Pass" id="slider-Pass" type="range" min="1" max="5" value="1" data-highlight="true">
+                <label for="slider-s">防守 Defense:</label>
+                <input name="slider-Defense" id="slider-Defense" type="range" min="1" max="5" value="1" data-highlight="true">
+                <label for="slider-s">射门 Shoot:</label>
+                <input name="slider-Shoot" id="slider-Shoot" type="range" min="1" max="5" value="1" data-highlight="true">
+                <label for="slider-s">力量 Strength:</label>
+                <input name="slider-Strength" id="slider-Strength" type="range" min="1" max="5" value="1" data-highlight="true">
+                <input type="button" value="Save" data-theme="a">
+            </form>
+        </div>
     </div>
-  </body>
+</body>
 </html>
