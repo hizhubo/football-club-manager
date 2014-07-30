@@ -18,26 +18,14 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
-  // res.send('The start of Football Club Manager!');
-  res.render("players", {
-    players : [{
-        "id" : 1,
-        "firstName" : "Bo",
-        "lastName" : "Zhu",
-        "latestEndurance" : 3,
-        "latestSpeed" : 4,
-        "latestDribble" : 4,
-        "latestPass" : 4,
-        "latestDefense" : 5,
-        "latestShoot" : 5,
-        "latestStrength" : 3,
-        "latestOverallAbility" : 90
-      }
-    ]
+  rest.get(global.apiroot + '/players').once('complete', function (data) {
+    // Uses views/players.ejs
+    response.render("players", {
+      players : data
+    });
   });
 });
 
-// Render example.com/players
 app.get('/players', function (request, response) {
   rest.get(global.apiroot + '/players').once('complete', function (data) {
     // Uses views/players.ejs
@@ -48,7 +36,6 @@ app.get('/players', function (request, response) {
 });
 
 app.get('/add-player', function (req, res) {
-  // res.send('The start of Football Club Manager!');
   res.render("add-player", {
     player : [{
         "id" : 1,
