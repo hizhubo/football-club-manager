@@ -19,14 +19,14 @@
                 <tr>
                   <th data-priority="1">Number</th>
                   <th data-priority="persist">Name</th>
-                  <th data-priority="2">Overall Score</th>
+                  <th data-priority="2">Overall Ability</th>
                 </tr>
               </thead>
               <tbody>
                 <% for(var i = 0; i < players.length; i++) {%>
                 <tr>
                   <th><%= players[i].number %></th>
-                  <td><a href="/player/<%= players[i].id %>" data-rel="external"><%= players[i].firstName + " " + players[i].lastName + " " + players[i].chsName %></a></td>
+                  <td><a href="/add-player/<%= players[i].id %>" data-rel="external"><%= players[i].firstName + " " + players[i].lastName + " " + players[i].chsName %></a></td>
                   <td><%= players[i].latestOverallAbility %></td>
                 </tr>
                 <% } %>

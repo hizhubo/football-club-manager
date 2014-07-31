@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({
     extended : true
   }));
 app.use(bodyParser.json())
+app.disable('etag');
 
 app.get('/', function (req, res) {
   rest.get(global.apiroot + '/players').once('complete', function (data) {
@@ -38,20 +39,76 @@ app.get('/players', function (req, res) {
 app.get('/add-player', function (req, res) {
   res.render("add-player", {
     player : [{
-        "id" : 1,
-        "firstName" : "Bo",
-        "lastName" : "Zhu",
-        "latestEndurance" : 3,
-        "latestSpeed" : 4,
-        "latestDribble" : 4,
-        "latestPass" : 4,
-        "latestDefense" : 5,
-        "latestShoot" : 5,
-        "latestStrength" : 3,
-        "latestOverallAbility" : 90
+        number : '',
+        firstName : '',
+        lastName : '',
+        chsName : '',
+        email : '',
+        mobile : '',
+        wechat : '',
+        favoritePosition : '',
+        latestEndurance : 1,
+        latestSpeed : 1,
+        latestDribble : 1,
+        latestPass : 1,
+        latestDefense : 1,
+        latestShoot : 1,
+        latestStrength : 1,
+        latestOverallAbility : 1
       }
     ]
   });
+});
+
+app.get('/add-player/:id', function (req, res) {
+  rest.get(global.apiroot + '/player/' + req.params.id).once('complete', function (data) {
+    // Uses views/players.ejs
+    res.render("add-player", {
+      player : data
+    });
+  });
+});
+
+app.post('/add-player', function (req, res) {
+  var body = {
+    "player" : {
+      number : req.body.textinputNumber,
+      firstName : req.body.textinputFirstName,
+      lastName : req.body.textinputLastName,
+      chsName : req.body.textinputChsName,
+      email : req.body.textinputEmail,
+      mobile : req.body.textinputMobile,
+      wechat : req.body.textinputWechat,
+      favoritePosition : req.body.selectFavoritePosition,
+      latestEndurance : req.body.sliderEndurance,
+      latestSpeed : req.body.sliderSpeed,
+      latestDribble : req.body.sliderDribble,
+      latestPass : req.body.sliderPass,
+      latestDefense : req.body.sliderDefense,
+      latestShoot : req.body.sliderShoot,
+      latestStrength : req.body.sliderStrength,
+      latestOverallAbility : parseInt((req.body.sliderEndurance * global.weightEndurance + req.body.sliderSpeed * global.weightSpeed + req.body.sliderDribble * global.weightDribble + req.body.sliderPass * global.weightPass + req.body.sliderDefense * global.weightDefense + req.body.sliderShoot * global.weightShoot + req.body.sliderStrength * global.weightStrength) * 20)
+    }
+  };
+  console.log(body);
+  if (req.body.hiddenId > 0) {
+    body.player.id = req.body.hiddenId;
+    rest.put(global.apiroot + '/player', {
+      data : body
+    }).once('complete', function (data, response) {
+      if (response.statusCode == 200) {
+        res.redirect(global.webroot + '/players');
+      }
+    });
+  } else {
+    rest.post(global.apiroot + '/player', {
+      data : body
+    }).once('complete', function (data, response) {
+      if (response.statusCode == 200) {
+        res.redirect(global.webroot + '/players');
+      }
+    });
+  }
 });
 
 app.get('/api', function (req, res) {
@@ -59,7 +116,9 @@ app.get('/api', function (req, res) {
 });
 
 app.get('/api/players', function (req, res) {
-  global.db.Player.findAll().success(function (players) {
+  global.db.Player.findAll({
+    order : [['latestOverallAbility', 'DESC'], ['firstName', 'ASC']]
+  }).success(function (players) {
     var players_json = [];
     players.forEach(function (player) {
       players_json.push({

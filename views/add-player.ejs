@@ -14,44 +14,45 @@
             <h1>Create/Update Player</h1>
         </div>
         <div role="main" class="ui-content">
-            <form>
-                <label for="textinput-FirstName">First Name:</label>
-                <input name="textinput-FirstName" id="textinput-FirstName" type="text" placeholder="" value="" data-clear-btn="true">
-                <label for="textinput-LastName">Last Name:</label>
-                <input name="textinput-LastName" id="textinput-LastName" type="text" placeholder="" value="" data-clear-btn="true">
-                <label for="textinput-ChsName">中文名</label>
-                <input name="textinput-ChsName" id="textinput-ChsName" type="text" placeholder="" value="" data-clear-btn="true">
-                <label for="textinput-Email">Email:</label>
-                <input name="textinput-Email" id="textinput-Email" type="text" placeholder="" value="" data-clear-btn="true">
-                <label for="textinput-Number">Number:</label>
-                <input name="textinput-Number" id="textinput-Number" type="text" placeholder="" value="" data-clear-btn="true">
-                <label for="textinput-Mobile">Mobile:</label>
-                <input name="textinput-Mobile" id="textinput-Mobile" type="text" placeholder="" value="" data-clear-btn="true">
-                <label for="textinput-Wechat">Wechat:</label>
-                <input name="textinput-Wechat" id="textinput-Wechat" type="text" placeholder="" value="" data-clear-btn="true">
-                <label for="select-FavoritePosition">最爱位置 Favorite Position:</label>
-                <select name="select-FavoritePosition" id="select-FavoritePosition">
+            <form action="/add-player" method="post">
+                <label for="textinputFirstName">First Name:</label>
+                <input name="textinputFirstName" id="textinputFirstName" type="text" placeholder="" value="<%= player[0].firstName %>" data-clear-btn="true" required>
+                <label for="textinputLastName">Last Name:</label>
+                <input name="textinputLastName" id="textinputLastName" type="text" placeholder="" value="<%= player[0].lastName %>" data-clear-btn="true" required>
+                <label for="textinputChsName">中文名:</label>
+                <input name="textinputChsName" id="textinputChsName" type="text" placeholder="" value="<%= player[0].chsName %>" data-clear-btn="true">
+                <label for="textinputEmail">Email:</label>
+                <input name="textinputEmail" id="textinputEmail" type="text" placeholder="" value="<%= player[0].email %>" data-clear-btn="true" required>
+                <label for="textinputNumber">Number:</label>
+                <input name="textinputNumber" id="textinputNumber" type="text" placeholder="" value="<%= player[0].number %>" data-clear-btn="true">
+                <label for="textinputMobile">Mobile:</label>
+                <input name="textinputMobile" id="textinputMobile" type="text" placeholder="" value="<%= player[0].mobile %>" data-clear-btn="true">
+                <label for="textinputWechat">Wechat:</label>
+                <input name="textinputWechat" id="textinputWechat" type="text" placeholder="" value="<%= player[0].wechat %>" data-clear-btn="true">
+                <label for="selectFavoritePosition">最爱位置 Favorite Position:</label>
+                <select name="selectFavoritePosition" id="selectFavoritePosition">
                     <option value="">Select</option>
                     <option value="Forward">前锋 Forward</option>
                     <option value="MidFielder">中场 MidFielder</option>
                     <option value="FullBack">后卫 FullBack</option>
                     <option value="Goalie">门将 Goalie</option>
                 </select>
-                <label for="slider-s">耐力 Endurance:</label>
-                <input name="slider-Endurance" id="slider-Endurance" type="range" min="1" max="5" value="1" data-highlight="true">
-                <label for="slider-s">速度 Speed:</label>
-                <input name="slider-Speed" id="slider-Speed" type="range" min="1" max="5" value="1" data-highlight="true">
-                <label for="slider-s">盘带 Dribble:</label>
-                <input name="slider-Dribble" id="slider-Dribble" type="range" min="1" max="5" value="1" data-highlight="true">
-                <label for="slider-s">传球 Pass:</label>
-                <input name="slider-Pass" id="slider-Pass" type="range" min="1" max="5" value="1" data-highlight="true">
-                <label for="slider-s">防守 Defense:</label>
-                <input name="slider-Defense" id="slider-Defense" type="range" min="1" max="5" value="1" data-highlight="true">
-                <label for="slider-s">射门 Shoot:</label>
-                <input name="slider-Shoot" id="slider-Shoot" type="range" min="1" max="5" value="1" data-highlight="true">
-                <label for="slider-s">力量 Strength:</label>
-                <input name="slider-Strength" id="slider-Strength" type="range" min="1" max="5" value="1" data-highlight="true">
-                <input type="button" value="Save" data-theme="a">
+                <label for="sliderEndurance">耐力 Endurance:</label>
+                <input name="sliderEndurance" id="sliderEndurance" type="range" min="1" max="5" value="<%= player[0].latestEndurance %>" data-highlight="true">
+                <label for="sliderSpeed">速度 Speed:</label>
+                <input name="sliderSpeed" id="sliderSpeed" type="range" min="1" max="5" value="<%= player[0].latestSpeed %>" data-highlight="true">
+                <label for="sliderDribble">盘带 Dribble:</label>
+                <input name="sliderDribble" id="sliderDribble" type="range" min="1" max="5" value="<%= player[0].latestDribble %>" data-highlight="true">
+                <label for="sliderPass">传球 Pass:</label>
+                <input name="sliderPass" id="sliderPass" type="range" min="1" max="5" value="<%= player[0].latestPass %>" data-highlight="true">
+                <label for="sliderDefense">防守 Defense:</label>
+                <input name="sliderDefense" id="sliderDefense" type="range" min="1" max="5" value="<%= player[0].latestDefense %>" data-highlight="true">
+                <label for="sliderShoot">射门 Shoot:</label>
+                <input name="sliderShoot" id="sliderShoot" type="range" min="1" max="5" value="<%= player[0].latestShoot %>" data-highlight="true">
+                <label for="sliderStrength">力量 Strength:</label>
+                <input name="sliderStrength" id="sliderStrength" type="range" min="1" max="5" value="<%= player[0].latestStrength %>" data-highlight="true">
+                <input type="hidden" name="hiddenId" id="hiddenId" value="<%= player[0].id %>">
+                <input type="submit" value="Save" data-theme="a">
             </form>
         </div>
         <div data-role="footer">
@@ -63,6 +64,18 @@
                 </ul>
             </div>
         </div>
+        <script>
+        (function() {
+            // Grab a select field
+            var el = $('#selectFavoritePosition');
+
+            // Select the relevant option, de-select any others
+            el.val('<%= player[0].favoritePosition %>').attr('selected', true).siblings('option').removeAttr('selected');
+
+            // jQM refresh
+            el.selectmenu("refresh", true);
+        })();
+        </script>
     </div>
 </body>
 </html>

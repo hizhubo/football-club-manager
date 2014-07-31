@@ -25,6 +25,7 @@ if (!global.hasOwnProperty('db')) {
             logging:  true //false
         };
         sq = new Sequelize(dbname, user, password, config);
+        global.webroot = 'http://football-club-manager.herokuapp.com';
         global.apiroot = 'http://football-club-manager.herokuapp.com/api';
     } else {
         /* Local database
@@ -43,6 +44,7 @@ if (!global.hasOwnProperty('db')) {
             host:     host,
         };
         var sq = new Sequelize(dbname, user, password, config);
+        global.webroot = 'http://localhost:81';
         global.apiroot = 'http://localhost:81/api';
     }
     global.db = {
@@ -50,5 +52,12 @@ if (!global.hasOwnProperty('db')) {
         sequelize: sq,
         Player: sq.import(__dirname + '/player')
     };
+    global.weightEndurance = 0.15;
+    global.weightSpeed = 0.15;
+    global.weightDribble = 0.1;
+    global.weightPass = 0.2;
+    global.weightDefense = 0.15;
+    global.weightShoot = 0.15;
+    global.weightStrength = 0.1;
 }
 module.exports = global.db;
