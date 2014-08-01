@@ -26,7 +26,7 @@
                 <% for(var i = 0; i < players.length; i++) {%>
                 <tr>
                   <th><%= players[i].number %></th>
-                  <td><a href="/add-player/<%= players[i].id %>" data-rel="external" data-prefetch="true"><%= players[i].firstName + " " + players[i].lastName + " " + players[i].chsName %></a></td>
+                  <td><a href="/add-player/<%= players[i].id %>" data-rel="external" data-ajax="false"><%= players[i].firstName + " " + players[i].lastName + " " + players[i].chsName %></a></td>
                   <td><%= players[i].latestOverallAbility %></td>
                 </tr>
                 <% } %>
