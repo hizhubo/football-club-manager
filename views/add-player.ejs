@@ -64,18 +64,21 @@
                 </ul>
             </div>
         </div>
-        <script>
-        (function() {
-            // Grab a select field
-            var el = $('#selectFavoritePosition');
-
-            // Select the relevant option, de-select any others
-            el.val('<%= player[0].favoritePosition %>').attr('selected', true).siblings('option').removeAttr('selected');
-
-            // jQM refresh
-            el.selectmenu("refresh", true);
-        })();
-        </script>
     </div>
+    <script>
+    (function() {
+        // Grab a select field
+        var el = $('#selectFavoritePosition');
+
+        // Select the relevant option, de-select any others
+        el.val('<%= player[0].favoritePosition %>').attr('selected', true).siblings('option').removeAttr('selected');
+
+        // Initialize the selectmenu
+        el.selectmenu();
+
+        // jQM refresh
+        el.selectmenu("refresh", true);
+    })();
+    </script>
 </body>
 </html>
