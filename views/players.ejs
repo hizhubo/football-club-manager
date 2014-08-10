@@ -14,9 +14,10 @@
             <h1>Players</h1>
         </div>
         <div role="main" class="ui-content">
-            <table data-role="table" id="player-table" data-mode="reflow" class="ui-responsive">
+            <table data-role="table" id="player-table" data-mode="reflow" class="ui-responsive table-stroke">
               <thead>
                 <tr>
+                  <th></th>
                   <th data-priority="1">Number</th>
                   <th data-priority="persist">Name</th>
                   <th data-priority="2">Overall Ability</th>
@@ -25,13 +26,15 @@
               <tbody>
                 <% for(var i = 0; i < players.length; i++) {%>
                 <tr>
-                  <th><%= players[i].number %></th>
+                  <td><input type="checkbox" name="selectedPlayers" id="selectedUser-<%= players[i].id %>"></td>
+                  <td><%= players[i].number %></td>
                   <td><a href="/add-player/<%= players[i].id %>" data-rel="external" data-ajax="false"><%= players[i].firstName + " " + players[i].lastName + " " + players[i].chsName %></a></td>
                   <td><%= players[i].latestOverallAbility %></td>
                 </tr>
                 <% } %>
               </tbody>
             </table>
+            <button id="group-button" data-icon="user" data-theme="b">Auto Group</button>
         </div>
         <div data-role="footer">
             <div data-role="navbar">
@@ -42,6 +45,22 @@
                 </ul>
             </div>
         </div>
+        <script>
+        (function() {
+            $("#group-button").click(function(){
+                var selectedPlayers = $('input[name=selectedPlayers]:checked').map(function(){
+                    return $(this).attr('id').replace('selectedUser-', '');
+                }).get();
+                
+                if(selectedPlayers.length) {
+                    alert('You have selected ' + selectedPlayers.length + ' players: ' + selectedPlayers);
+                } else {
+                    alert('No players is selected.');
+                }
+                
+            });
+        })();
+        </script>
     </div>
 </body>
 </html>
