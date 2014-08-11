@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js"></script>
 </head>
 <body>
     <div data-role="page">
@@ -17,24 +18,23 @@
             <table data-role="table" id="player-table" data-mode="reflow" class="ui-responsive table-stroke">
               <thead>
                 <tr>
-                  <th></th>
-                  <th data-priority="1">Number</th>
                   <th data-priority="persist">Name</th>
+                  <th data-priority="1">Number</th>
                   <th data-priority="2">Overall Ability</th>
                 </tr>
               </thead>
               <tbody>
                 <% for(var i = 0; i < players.length; i++) {%>
                 <tr>
-                  <td><input type="checkbox" name="selectedPlayers" id="selectedUser-<%= players[i].id %>"></td>
+                  <td><input type="checkbox" name="selectedPlayers" id="selectedUser-<%= players[i].id %>" data-bind="click: clickPlayerCheckBox"><label for="selectedUser-<%= players[i].id %>"><%= players[i].firstName + " " + players[i].lastName + " " + players[i].chsName %></label></td>
                   <td><%= players[i].number %></td>
-                  <td><a href="/add-player/<%= players[i].id %>" data-rel="external" data-ajax="false"><%= players[i].firstName + " " + players[i].lastName + " " + players[i].chsName %></a></td>
                   <td><%= players[i].latestOverallAbility %></td>
                 </tr>
                 <% } %>
               </tbody>
             </table>
-            <button id="group-button" data-icon="user" data-theme="b">Auto Group</button>
+            <button id="group-button" data-icon="user" data-theme="b" data-bind="click: autoGroup, visible: shouldShowGroupButton">Auto Group</button>
+            <button id="edit-button" data-icon="edit" data-theme="b" data-bind="click: gotoEdit, visible: shouldShowEditButton">Edit</button>
         </div>
         <div data-role="footer">
             <div data-role="navbar">
@@ -47,18 +47,30 @@
         </div>
         <script>
         (function() {
-            $("#group-button").click(function(){
-                var selectedPlayers = $('input[name=selectedPlayers]:checked').map(function(){
-                    return $(this).attr('id').replace('selectedUser-', '');
-                }).get();
-                
-                if(selectedPlayers.length) {
-                    alert('You have selected ' + selectedPlayers.length + ' players: ' + selectedPlayers);
-                } else {
-                    alert('No players is selected.');
-                }
-                
-            });
+            function ViewModel() {
+                this.shouldShowGroupButton = ko.observable(false);
+                this.shouldShowEditButton = ko.observable(false);
+                this.selectedPlayers = [];
+                this.clickPlayerCheckBox = function() {
+                    this.selectedPlayers = $('input[name=selectedPlayers]:checked').map(function(){
+                        return $(this).attr('id').replace('selectedUser-', '');
+                    }).get();
+                    this.shouldShowGroupButton(this.selectedPlayers.length > 1);
+                    this.shouldShowEditButton(this.selectedPlayers.length == 1);
+                };
+                this.autoGroup = function() {
+                    if(this.selectedPlayers.length) {
+                        alert('You have selected ' + this.selectedPlayers.length + ' players: ' + this.selectedPlayers);
+                    } else {
+                        alert('No players is selected.');
+                    }
+                };
+                this.gotoEdit = function() {
+                    var playerId = $('input[name=selectedPlayers]:checked').first().attr('id').replace('selectedUser-', '');
+                    window.location.href = "/add-player/" + playerId;
+                };
+            };
+            ko.applyBindings(new ViewModel());
         })();
         </script>
     </div>
