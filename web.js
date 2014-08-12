@@ -7,6 +7,7 @@ var https = require('https');
 var db = require('./models');
 var playersApi = require('./controllers/playersApi');
 var players = require('./controllers/players');
+var groupPlayers = require('./controllers/groupPlayers');
 var bodyParser = require('body-parser');
 var rest = require('restler');
 
@@ -28,6 +29,9 @@ app.get('/players', players.players);
 app.get('/add-player', players.addPlayer);
 app.get('/add-player/:id', players.addPlayerSpecifiedId);
 app.post('/add-player', players.savePlayer);
+
+// Group page
+app.get('/group', groupPlayers.group);
 
 // Players API
 app.get('/api', playersApi.api);

@@ -35,6 +35,13 @@
             </table>
             <button id="group-button" data-icon="user" data-theme="b" data-bind="click: autoGroup, visible: shouldShowGroupButton">Auto Group</button>
             <button id="edit-button" data-icon="edit" data-theme="b" data-bind="click: gotoEdit, visible: shouldShowEditButton">Edit</button>
+            <div id="divGroupNumbers" data-role="popup" id="popupMenu" data-theme="b">
+                <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                    <li data-role="list-divider">Choose group numbers</li>
+                    <li><a href="#" data-bind="click: gotoGroup2">2</a></li>
+                    <li><a href="#" data-bind="click: gotoGroup3">3</a></li>
+                </ul>
+            </div>
         </div>
         <div data-role="footer">
             <div data-role="navbar">
@@ -59,16 +66,32 @@
                     this.shouldShowEditButton(this.selectedPlayers.length == 1);
                 };
                 this.autoGroup = function() {
+                    if ($(".ui-popup-active").length > 0) {
+                        $('#divGroupNumbers').popup('close');
+                    } else {
+                        $('#divGroupNumbers').popup('open');
+                    }
+                    /*
                     if(this.selectedPlayers.length) {
                         alert('You have selected ' + this.selectedPlayers.length + ' players: ' + this.selectedPlayers);
                     } else {
                         alert('No players is selected.');
                     }
+                     */
                 };
                 this.gotoEdit = function() {
                     var playerId = $('input[name=selectedPlayers]:checked').first().attr('id').replace('selectedUser-', '');
                     window.location.href = "/add-player/" + playerId;
                 };
+                this.gotoGroup2 = function() {
+                    this.gotoGroup(2);
+                }
+                this.gotoGroup3 = function() {
+                    this.gotoGroup(3);
+                }
+                this.gotoGroup = function(groups) {
+                    window.location.href = "/group/?groups=" + groups + "&players=" + this.selectedPlayers;
+                }
             };
             ko.applyBindings(new ViewModel());
         })();
