@@ -127,6 +127,61 @@ exports.deletePlayer = function (req, res) {
   });
 }
 
+exports.groupPlayer = function (req, res) {
+  var groupNumber = req.body.groupNumber;
+  var playerIds = req.body.players;
+  var players = playerIds.split(",");
+
+  // Hard-coding for now. Should be replaced by intelligent grouping.
+  var groupPlans = 2;
+
+  global.db.Player.findAll({
+    where : {
+      id : players
+    },
+    order : [['latestOverallAbility', 'DESC'], ['firstName', 'ASC']]
+  }).success(function (players) {
+    var players_json = [];
+
+    players.forEach(function (player) {
+      players_json.push({
+        id : player.id,
+        firstName : player.firstName,
+        lastName : player.lastName,
+        chsName : player.chsName,
+        latestOverallAbility : player.latestOverallAbility
+      });
+    });
+
+    var groupings = [];
+    var playersInEachGroup = Math.round(players_json.length / groupNumber);
+
+    for (var i = 0; i < groupPlans; i++) {
+      var shuffledPlayers = shuffle(players_json);
+      var grouping = [];
+
+      for (var j = 0; j < groupNumber; j++) {
+        var start = j * playersInEachGroup;
+        var end = start + playersInEachGroup;
+
+        if (j < groupNumber - 1) {
+          grouping.push(shuffledPlayers.slice(start, end));
+        } else {
+          // The last group should contain the rest players.
+          grouping.push(shuffledPlayers.slice(start));
+        }
+      }
+
+      groupings.push(grouping);
+    }
+
+    res.send(groupings);
+  }).error(function (err) {
+    console.log(err);
+    res.status(500).send("Error retrieving players.");
+  });
+}
+
 // add player to the database if it doesn't already exist.
 var addPlayer = function (player_obj, callback) {
   var player = player_obj.player;
@@ -210,4 +265,10 @@ var updatePlayer = function (player_obj, callback) {
       });
     }
   });
+}
+
+var shuffle = function shuffle(o) {
+  for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+
+  return o;
 }

@@ -40,6 +40,7 @@ app.get('/api/player/:id', playersApi.getPlayer);
 app.post('/api/player', playersApi.addPlayer);
 app.put('/api/player', playersApi.updatePlayer);
 app.delete('/api/player/:id', playersApi.deletePlayer);
+app.post('/api/groupPlayer', playersApi.groupPlayer);
 
 // sync the database and start the server
 db.sequelize.sync().complete(function (err) {

@@ -15,8 +15,19 @@
             <h1>Group Players</h1>
         </div>
         <div role="main" class="ui-content">
-            <div><%= numbers %></div>
-            <div><%= players %></div>
+            <% for(var i = 0; i < groups.length; i++) {%>
+            <div data-role="collapsible" data-inset="false">
+                <h4>Group Plan <%= i %></h4>
+                <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                <% for(var j = 0; j < groups[i].length; j++) {%>
+                    <li data-role="list-divider">Team <%= j %></li>
+                    <% for(var k = 0; k < groups[i][j].length; k++) {%>
+                    <li><%= groups[i][j][k].firstName + " " + groups[i][j][k].lastName + " " + groups[i][j][k].chsName + "(" + groups[i][j][k].latestOverallAbility + ")"%></li>
+                    <% } %>
+                <% } %>
+                </ul>
+            </div>
+            <% } %>
         </div>
         <div data-role="footer">
             <div data-role="navbar">
